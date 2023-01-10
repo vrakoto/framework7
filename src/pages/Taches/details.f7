@@ -1,0 +1,47 @@
+<template>
+    <div class="page" data-name="type-detail">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Retour</span>
+                    </a>
+                </div>
+                <div class="title">${$f7route.params.idTache}</div>
+                <div class="right">
+                    <a href="/list_tache/edit/" class="link icon-only" data-panel="right">
+                        <i class="icon f7-icons if-not-md">edit</i>
+                        <i class="icon material-icons if-md">edit</i>
+                    </a>
+                    <a href="/tache/create/" class="link icon-only" data-panel="right">
+                        <i class="icon f7-icons if-not-md">add</i>
+                        <i class="icon material-icons if-md">add</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="list links-list">
+                <ul>
+                    <li><a href="/sous_tache/detail/Javascript">Javascript</a></li>
+                    <li><a href="/sous_tache/detail/PHP">PHP</a></li>
+                    <li><a href="/sous_tache/detail/Java">Java</a></li>
+                    <li><a href="/sous_tache/detail/Python">Python</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default (props, { $, $on, $f7 }) => {
+        $on("pageInit", () => {
+            $("#btnUpdate").click(() => {
+                console.log(props, { $, $on, $f7 });
+                $f7.router.navigate(`/type/update/${props.idType}`);
+            });
+        })
+        return $render;
+    };
+</script>

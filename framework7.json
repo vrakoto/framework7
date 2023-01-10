@@ -1,0 +1,19 @@
+{
+  "cwd": "C:\\xampp\\htdocs\\TodoList",
+  "type": [
+    "pwa"
+  ],
+  "name": "RobertApp",
+  "framework": "core",
+  "template": "split-view",
+  "bundler": "vite",
+  "cssPreProcessor": "less",
+  "theming": {
+    "customColor": true,
+    "color": "#6c0277",
+    "darkTheme": true,
+    "iconFonts": true,
+    "fillBars": true
+  },
+  "customBuild": false
+}

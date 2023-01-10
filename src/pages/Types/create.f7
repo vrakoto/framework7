@@ -1,0 +1,70 @@
+<template>
+  <div class="page" data-name="type-create">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Retour</span>
+          </a>
+        </div>
+        <div class="title">Créer un type</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <form class="list" id="typeAdd">
+        <ul>
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Nom</div>
+                <div class="item-input-wrap">
+                  <input type="text" name="name" placeholder="Nom du type" />
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Couleur</div>
+                <div class="item-input-wrap">
+                  <input type="color" name="color" placeholder="color" />
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Type parent</div>
+                <div class="item-input-wrap">
+                  <select name="typeParent">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </form>
+      <div class="block block-strong row">
+        <div class="col"><a class="button button-fill" href="#" id="btnSave">Sauvegarder</a></div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  export default (props, { $, $on, $f7 }) => {
+    $on('pageInit', () => {
+      $("#btnSave").click(() => {
+        const data = $f7.form.convertToData('#typeAdd');
+        $f7.dialog.alert(JSON.stringify(data), "Données sauvegardées");
+      })
+    });
+
+    return $render;
+  }
+</script>

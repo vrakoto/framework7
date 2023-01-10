@@ -1,0 +1,36 @@
+<template>
+    <div class="page" data-name="type-list">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="title">Liste des tâches</div>
+                <div class="right">
+                    <a href="/tache/create/" class="link icon-only" data-panel="right">
+                        <i class="icon f7-icons if-not-md">add</i>
+                        <i class="icon material-icons if-md">add</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="list links-list">
+                <ul>
+                    <li><a href="/tache/detail/Cours de dev">Cours de Dev</a></li>
+                    <li><a href="/tache/detail/Faire le ménage">Faire le ménage</a></li>
+                    <li><a href="/tache/detail/Moto">Moto</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default () => {
+        return $render;
+    };
+</script>

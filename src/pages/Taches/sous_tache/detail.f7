@@ -1,0 +1,39 @@
+<template>
+    <div class="page" data-name="type-detail">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Retour</span>
+                    </a>
+                </div>
+                <div class="title">${$f7route.params.idTache}</div>
+                <div class="right">
+                    <a href="/list_tache/edit/" class="link icon-only" data-panel="right">
+                        <i class="icon f7-icons if-not-md">edit</i>
+                        <i class="icon material-icons if-md">edit</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block-title">...</div>
+            <div class="block block-strong">
+                <button class="col button button-fill" id="btnUpdate">Modifier la sous-tâche</button>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default (props, { $, $on, $f7 }) => {
+        $on("pageInit", () => {
+            $("#btnUpdate").click(() => {
+                console.log(props, { $, $on, $f7 });
+                $f7.router.navigate(`/type/update/${props.idType}`);
+            });
+        })
+        return $render;
+    };
+</script>
