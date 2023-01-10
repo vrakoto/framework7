@@ -10,16 +10,34 @@
                     </a>
                 </div>
                 <div class="title">${$f7route.params.idTache}</div>
-                <div class="right">
-                    <a href="/list_tache/edit/" class="link icon-only" data-panel="right">
-                        <i class="icon f7-icons if-not-md">edit</i>
-                        <i class="icon material-icons if-md">edit</i>
-                    </a>
-                </div>
             </div>
         </div>
         <div class="page-content">
-            <div class="block-title">...</div>
+            <form class="list" id="typeAdd">
+                <ul>
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Nom de la tâche</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" name="name" value="${$f7route.params.idTache}" placeholder="Nom de la tâche" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Description</div>
+                                <div class="item-textarea-wrap">
+                                    <textarea name="name"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
             <div class="block block-strong">
                 <button class="col button button-fill" id="btnUpdate">Modifier la sous-tâche</button>
             </div>
