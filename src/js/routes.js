@@ -1,9 +1,5 @@
 import HomePage from '../pages/home.f7';
-import AboutPage from '../pages/about.f7';
-import FormPage from '../pages/form.f7';
 
-import LeftPage1 from '../pages/left-page-1.f7';
-import LeftPage2 from '../pages/left-page-2.f7';
 import DynamicRoutePage from '../pages/dynamic-route.f7';
 import RequestAndLoad from '../pages/request-and-load.f7';
 import NotFoundPage from '../pages/404.f7';
@@ -65,24 +61,6 @@ var routes = [
     component: SousTacheDetail,
   },
 
-
-  {
-    path: '/about/',
-    component: AboutPage,
-  },
-  {
-    path: '/form/',
-    component: FormPage,
-  },
-
-  {
-    path: '/left-page-1/',
-    component: LeftPage1,
-  },
-  {
-    path: '/left-page-2/',
-    component: LeftPage2,
-  },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
     component: DynamicRoutePage,
