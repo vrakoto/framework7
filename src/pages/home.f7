@@ -16,37 +16,16 @@
             <div class="list links-list">
                 <ul>
                     <li>
-                        <a href="/type/list/">Les types</a>
-                        <a href="/tache/list/">Les tâches</a>
+                        <a href="/tache/list/">La liste</a>
+                        <!-- <a href="/type/list/">Les types</a> -->
                     </li>
-                    <!-- <li>
-            <a href="/dynamic-route/blog/45/post/125/?foo=bar#about">Dynamic (Component) Route</a>
-          </li> -->
-                    <!-- <li>
-            <a href="/load-something-that-doesnt-exist/">Default Route (404)</a>
-          </li> -->
-                    <!-- <li>
-            <a href="/request-and-load/user/123456/">Request Data & Load</a>
-          </li> -->
                 </ul>
             </div>
         </div>
     </div>
 </template>
 <script>
-    export default function (props, { $onMounted, $f7 }) {
-        $onMounted(() => {
-            $f7.request.get('http://localhost/api_f7/')
-                .then(function (res) {
-                    console.log(res.data);
-                })
-                .catch(function (err) {
-                    console.log(err.xhr)
-                    console.log(err.status)
-                    console.log(err.message)
-                })
-        });
+    export default () => {
         return $render;
-    }
-    
+    };
 </script>

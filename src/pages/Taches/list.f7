@@ -20,17 +20,51 @@
         </div>
         <div class="page-content">
             <div class="list links-list">
-                <ul>
-                    <li><a href="/tache/detail/Cours de dev">Cours de Dev</a></li>
-                    <li><a href="/tache/detail/Faire le ménage">Faire le ménage</a></li>
-                    <li><a href="/tache/detail/Moto">Moto</a></li>
-                </ul>
+                <ul id="lesTaches"></ul>
             </div>
         </div>
     </div>
 </template>
 <script>
-    export default () => {
+    export default function (props, { $onMounted, $f7 }) {
+        $onMounted(() => {
+            $f7.request.get('http://localhost/api_f7/')
+                .then(function (res) {
+                    if (res.data) {
+                        const lesTaches = JSON.parse(res.data)
+
+                        // Récupère l'élément <ul> où les éléments <li> seront ajoutés
+                        const ul = document.getElementById('lesTaches');
+
+                        // Boucle sur chaque élément du tableau et crée un élément <li> avec une balise <a> pour chaque élément
+                        lesTaches.forEach(function (element) {
+                            let { id_liste, nom } = element
+                            // Crée un nouvel élément <li>
+                            const li = document.createElement('li');
+
+                            // Crée un nouvel élément <a>
+                            const a = document.createElement('a');
+
+                            // Ajoute l'attribut href à l'élément <a>
+                            a.href = "/tache/detail/" + id_liste;
+
+                            // Ajoute le texte de l'élément à l'élément <a>
+                            a.textContent = nom;
+
+                            // Ajoute l'élément <a> à l'élément <li>
+                            li.appendChild(a);
+
+                            // Ajoute l'élément <li> à l'élément <ul>
+                            ul.appendChild(li);
+                        });
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err.xhr)
+                    console.log(err.status)
+                    console.log(err.message)
+                })
+        });
         return $render;
-    };
+    }
 </script>

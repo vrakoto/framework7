@@ -45,13 +45,28 @@
     </div>
 </template>
 <script>
-    export default (props, { $, $on, $f7 }) => {
-        $on("pageInit", () => {
+    export default (props, { $, $on, $onMounted, $f7 }) => {
+        /* $on("pageInit", () => {
             $("#btnUpdate").click(() => {
                 console.log(props, { $, $on, $f7 });
                 $f7.router.navigate(`/type/update/${props.idType}`);
             });
-        })
+        }) */
+
+        $onMounted(() => {
+            $f7.request.get(`http://localhost/api_f7/index.php?q=latache&id=${props.idTache}`)
+                .then(function (res) {
+                    if (res.data) {
+                        const laTache = JSON.parse(res.data)
+                        console.log(laTache);
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err.xhr)
+                    console.log(err.status)
+                    console.log(err.message)
+                })
+        });
         return $render;
     };
 </script>
