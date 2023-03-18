@@ -9,7 +9,8 @@
                         <span class="if-not-md">Retour</span>
                     </a>
                 </div>
-                <div class="title">${$f7route.params.idTache}</div>
+                <!-- <div class="title">${$f7route.params.idTache}</div> -->
+                <div class="title" id="title_nom_tache"></div>
             </div>
         </div>
         <div class="page-content">
@@ -20,7 +21,7 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Nom de la tâche</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" name="name" value="${$f7route.params.idTache}" placeholder="Nom de la tâche" />
+                                    <input type="text" name="name" id="nom_tache" placeholder="Nom de la tâche" />
                                 </div>
                             </div>
                         </div>
@@ -31,7 +32,7 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Description</div>
                                 <div class="item-textarea-wrap">
-                                    <textarea name="name"></textarea>
+                                    <textarea name="name" id="description"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -46,19 +47,22 @@
 </template>
 <script>
     export default (props, { $, $on, $onMounted, $f7 }) => {
-        /* $on("pageInit", () => {
-            $("#btnUpdate").click(() => {
+        $on("pageInit", () => {
+            /* $("#btnUpdate").click(() => {
                 console.log(props, { $, $on, $f7 });
                 $f7.router.navigate(`/type/update/${props.idType}`);
-            });
-        }) */
+            }); */
+        })
+
 
         $onMounted(() => {
-            $f7.request.get(`http://localhost/api_f7/index.php?q=latache&id=${props.idTache}`)
+            $f7.request.get(`http://localhost/api_f7/index.php?q=laTache&id=${props.idTache}`)
                 .then(function (res) {
                     if (res.data) {
                         const laTache = JSON.parse(res.data)
-                        console.log(laTache);
+                        $('#title_nom_tache').append(laTache[0].nom)
+                        $('#nom_tache').val(laTache[0].nom)
+                        $('#description').append(laTache[0].description)
                     }
                 })
                 .catch(function (err) {

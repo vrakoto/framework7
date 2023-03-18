@@ -33,28 +33,18 @@
                     if (res.data) {
                         const lesTaches = JSON.parse(res.data)
 
-                        // Récupère l'élément <ul> où les éléments <li> seront ajoutés
                         const ul = document.getElementById('lesTaches');
 
-                        // Boucle sur chaque élément du tableau et crée un élément <li> avec une balise <a> pour chaque élément
                         lesTaches.forEach(function (element) {
                             let { id_liste, nom } = element
-                            // Crée un nouvel élément <li>
-                            const li = document.createElement('li');
 
-                            // Crée un nouvel élément <a>
+                            const li = document.createElement('li');
                             const a = document.createElement('a');
 
-                            // Ajoute l'attribut href à l'élément <a>
-                            a.href = "/tache/detail/" + id_liste;
-
-                            // Ajoute le texte de l'élément à l'élément <a>
+                            a.href = "/taches/tache/" + id_liste;
                             a.textContent = nom;
 
-                            // Ajoute l'élément <a> à l'élément <li>
                             li.appendChild(a);
-
-                            // Ajoute l'élément <li> à l'élément <ul>
                             ul.appendChild(li);
                         });
                     }

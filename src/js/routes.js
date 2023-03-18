@@ -4,18 +4,18 @@ import DynamicRoutePage from '../pages/dynamic-route.f7';
 import RequestAndLoad from '../pages/request-and-load.f7';
 import NotFoundPage from '../pages/404.f7';
 
-import TypeList from "../pages/Types/list.f7";
+/* import TypeList from "../pages/Types/list.f7";
 import TypeDetail from "../pages/Types/details.f7";
 import TypeCreate from "../pages/Types/create.f7";
-import TypeUpdate from "../pages/Types/update.f7";
+import TypeUpdate from "../pages/Types/update.f7"; */
 
-import TacheList from "../pages/Taches/list.f7";
-import TacheDetail from "../pages/Taches/details.f7";
+import TachesList from "../pages/Taches/list.f7";
+import LaTache from "../pages/Taches/tache.f7";
 import TacheCreate from "../pages/Taches/create_tache.f7";
 import ListTachesCreate from "../pages/Taches/create_list.f7";
 import TacheUpdate from "../pages/Taches/update.f7";
 
-import SousTacheDetail from "../pages/Taches/sous_tache/detail.f7";
+import TacheDetail from "../pages/Taches/detail.f7";
 
 var routes = [
     {
@@ -41,12 +41,12 @@ var routes = [
 
 
     {
-        path: '/tache/list/',
-        component: TacheList,
+        path: '/taches/list/',
+        component: TachesList,
     },
     {
-        path: '/tache/detail/:idTache',
-        component: TacheDetail,
+        path: '/taches/tache/:idTache',
+        component: LaTache,
     },
     {
         path: '/tache/create/',
@@ -57,8 +57,8 @@ var routes = [
         component: TacheUpdate,
     },
     {
-        path: '/sous_tache/detail/:idTache',
-        component: SousTacheDetail,
+        path: '/tache/detail/:idTache',
+        component: TacheDetail,
     },
 
     {

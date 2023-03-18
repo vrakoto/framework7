@@ -24,48 +24,34 @@
         </div>
         <div class="page-content">
             <div class="list links-list">
-                <ul id="lesSousTaches"></ul>
+                <ul id="lesSousTaches">
+                </ul>
             </div>
         </div>
     </div>
 </template>
 <script>
     export default (props, { $, $onMounted, $on, $f7 }) => {
-        /* $on("pageInit", () => {
-            $("#btnUpdate").click(() => {
-                console.log(props, { $, $on, $f7 });
-                $f7.router.navigate(`/type/update/${props.idType}`);
-            });
-        }) */
-
         $onMounted(() => {
-            $f7.request.get(`http://localhost/api_f7/index.php?qtache&id=${props.idTache}`)
+            $f7.request.get(`http://localhost/api_f7/index.php?q=lesTaches&id=${props.idTache}`)
                 .then(function (res) {
                     if (res.data) {
                         const lesSousTaches = JSON.parse(res.data)
-
-                        // Récupère l'élément <ul> où les éléments <li> seront ajoutés
                         const ul = document.getElementById('lesSousTaches');
+                        const params = {test: 123}
 
-                        // Boucle sur chaque élément du tableau et crée un élément <li> avec une balise <a> pour chaque élément
                         lesSousTaches.forEach(function (element) {
                             let { id_tache, nom } = element
-                            // Crée un nouvel élément <li>
-                            const li = document.createElement('li');
 
-                            // Crée un nouvel élément <a>
+                            const li = document.createElement('li');
                             const a = document.createElement('a');
 
-                            // Ajoute l'attribut href à l'élément <a>
-                            a.href = "/sous_tache/detail/" + id_tache;
+                            a.href = "/tache/detail/" + id_tache;
+                            a.setAttribute("data-props", params)
 
-                            // Ajoute le texte de l'élément à l'élément <a>
                             a.textContent = nom;
 
-                            // Ajoute l'élément <a> à l'élément <li>
                             li.appendChild(a);
-
-                            // Ajoute l'élément <li> à l'élément <ul>
                             ul.appendChild(li);
                         });
                     }
