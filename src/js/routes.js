@@ -13,6 +13,7 @@ import TachesList from "../pages/Taches/list.f7";
 import LaTache from "../pages/Taches/tache.f7";
 import TacheCreate from "../pages/Taches/create_tache.f7";
 import ListTachesCreate from "../pages/Taches/create_list.f7";
+import ListeTachesDetails from "../pages/Taches/details_list.f7";
 import TacheUpdate from "../pages/Taches/update.f7";
 
 import TacheDetail from "../pages/Taches/detail.f7";
@@ -39,6 +40,10 @@ var routes = [
     //   component: TypeUpdate,
     // },
 
+    {
+        path: '/list_tache/edit/:idList',
+        component: ListeTachesDetails
+    },
 
     {
         path: '/taches/list/',

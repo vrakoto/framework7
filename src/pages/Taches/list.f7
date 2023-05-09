@@ -26,9 +26,9 @@
     </div>
 </template>
 <script>
-    export default function (props, { $onMounted, $f7 }) {
+    export default function (props, { $on, $onMounted, $f7 }) {
         $onMounted(() => {
-            $f7.request.get('http://localhost/api_f7/')
+            $f7.request.get('http://localhost/api_f7/index.php?q=lesListes')
                 .then(function (res) {
                     if (res.data) {
                         const lesTaches = JSON.parse(res.data)

@@ -11,7 +11,7 @@
                 </div>
                 <div class="title">Liste de la tâche N°${$f7route.params.idTache}</div>
                 <div class="right">
-                    <a href="/list_tache/edit/" class="link icon-only" data-panel="right">
+                    <a href="/list_tache/edit/${$f7route.params.idTache}" class="link icon-only" data-panel="right">
                         <i class="icon f7-icons if-not-md">edit</i>
                         <i class="icon material-icons if-md">edit</i>
                     </a>

@@ -9,8 +9,7 @@
                         <span class="if-not-md">Retour</span>
                     </a>
                 </div>
-                <!-- <div class="title">${$f7route.params.idTache}</div> -->
-                <div class="title" id="title_nom_tache"></div>
+                <div class="title">Liste N°${$f7route.params.idList}</div>
             </div>
         </div>
         <div class="page-content">
@@ -19,9 +18,9 @@
                     <li>
                         <div class="item-content item-input">
                             <div class="item-inner">
-                                <div class="item-title item-label">Nom de la tâche</div>
+                                <div class="item-title item-label">Nom de la liste</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" name="name" id="nom_tache" placeholder="Nom de la tâche" />
+                                    <input type="text" name="title" id="title" placeholder="Nom de la liste" />
                                 </div>
                             </div>
                         </div>
@@ -30,51 +29,30 @@
                     <li>
                         <div class="item-content item-input">
                             <div class="item-inner">
-                                <div class="item-title item-label">Description</div>
+                                <div class="item-title item-label">Description de la liste</div>
                                 <div class="item-textarea-wrap">
                                     <textarea name="name" id="description"></textarea>
                                 </div>
                             </div>
                         </div>
                     </li>
-
-                    <li>
-                        <div class="item-content item-input">
-                            <div class="item-inner">
-                                <div class="item-title item-label">Niveau de la tâche</div>
-                                <div class="item-input-wrap">
-                                    <input type="number" name="niveau" id="niveau" placeholder="Niveau de la tâche" />
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
                 </ul>
             </form>
             <div class="block block-strong">
-                <button class="col button button-fill" id="btnUpdate">Modifier la sous-tâche</button>
+                <button class="col button button-fill" id="btnUpdate">Supprimer la liste</button>
             </div>
         </div>
     </div>
 </template>
 <script>
-    export default (props, { $, $on, $onMounted, $f7 }) => {
+    export default (props, { $, $f7router, $on, $f7 }) => {
         $on("pageInit", () => {
-            /* $("#btnUpdate").click(() => {
-                console.log(props, { $, $on, $f7 });
-                $f7.router.navigate(`/type/update/${props.idType}`);
-            }); */
-        })
-
-        $onMounted(() => {
-            $f7.request.get(`http://localhost/api_f7/index.php?q=laTache&id=${props.idTache}`)
+            $f7.request.get(`http://localhost/api_f7/index.php?q=laListe&id=${props.idList}`)
                 .then(function (res) {
                     if (res.data) {
-                        const laTache = JSON.parse(res.data)
-                        $('#title_nom_tache').append(laTache[0].nom)
-                        $('#nom_tache').val(laTache[0].nom)
-                        $('#description').append(laTache[0].description)
-                        $('#niveau').val(laTache[0].niveau)
+                        const laListe = JSON.parse(res.data)
+                        $('#title').val(laListe[0].nom)
+                        $('#description').append(laListe[0].description)
                     }
                 })
                 .catch(function (err) {
@@ -82,7 +60,21 @@
                     console.log(err.status)
                     console.log(err.message)
                 })
-        });
+            $("#btnUpdate").click(() => {
+                $f7.request.post('http://localhost/api_f7/index.php?q=supprimerListe', {idListe: props.idList}, (response) => {
+                    try {
+                        const jsonResponse = JSON.parse(response);
+                        $f7.dialog.alert("La liste " + props.idList + " a bien été supprimée de la liste !");
+                        $f7router.navigate('/taches/list/');
+                    } catch (error) {
+                        $f7.dialog.alert("Erreur interne");
+                    }
+                }, (error) => {
+                    console.error('Error:', error);
+                });
+            });
+        })
+
         return $render;
     };
 </script>
