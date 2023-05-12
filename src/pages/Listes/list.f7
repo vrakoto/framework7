@@ -1,21 +1,17 @@
 <template>
-    <div class="page" data-name="type-detail">
+    <div class="page" data-name="type-list">
         <div class="navbar">
             <div class="navbar-bg"></div>
             <div class="navbar-inner sliding">
                 <div class="left">
                     <a href="#" class="link back">
                         <i class="icon icon-back"></i>
-                        <span class="if-not-md">Retour</span>
+                        <span class="if-not-md">Back</span>
                     </a>
                 </div>
-                <div class="title">Liste de la tâche N°${$f7route.params.idTache}</div>
+                <div class="title">Liste</div>
                 <div class="right">
-                    <a href="/list_tache/edit/${$f7route.params.idTache}" class="link icon-only" data-panel="right">
-                        <i class="icon f7-icons if-not-md">edit</i>
-                        <i class="icon material-icons if-md">edit</i>
-                    </a>
-                    <a href="/tache/create/" class="link icon-only" data-panel="right">
+                    <a href="/list/create/" class="link icon-only" data-panel="right">
                         <i class="icon f7-icons if-not-md">add</i>
                         <i class="icon material-icons if-md">add</i>
                     </a>
@@ -24,31 +20,28 @@
         </div>
         <div class="page-content">
             <div class="list links-list">
-                <ul id="lesSousTaches">
-                </ul>
+                <ul id="lesTaches"></ul>
             </div>
         </div>
     </div>
 </template>
 <script>
-    export default (props, { $, $onMounted, $on, $f7 }) => {
+    export default function (props, { $on, $onMounted, $f7 }) {
         $onMounted(() => {
-            $f7.request.get(`http://localhost/api_f7/index.php?q=lesTaches&id=${props.idTache}`)
+            $f7.request.get('http://localhost/api_f7/index.php?q=lesListes')
                 .then(function (res) {
                     if (res.data) {
-                        const lesSousTaches = JSON.parse(res.data)
-                        const ul = document.getElementById('lesSousTaches');
-                        const params = {test: 123}
+                        const lesTaches = JSON.parse(res.data)
 
-                        lesSousTaches.forEach(function (element) {
-                            let { id_tache, nom } = element
+                        const ul = document.getElementById('lesTaches');
+
+                        lesTaches.forEach(function (element) {
+                            let { id_liste, nom } = element
 
                             const li = document.createElement('li');
                             const a = document.createElement('a');
 
-                            a.href = "/tache/detail/" + id_tache;
-                            a.setAttribute("data-props", params)
-
+                            a.href = "/lesTaches/" + id_liste;
                             a.textContent = nom;
 
                             li.appendChild(a);
@@ -63,5 +56,5 @@
                 })
         });
         return $render;
-    };
+    }
 </script>

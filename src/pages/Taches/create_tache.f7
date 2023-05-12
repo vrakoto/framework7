@@ -9,7 +9,7 @@
                         <span class="if-not-md">Retour</span>
                     </a>
                 </div>
-                <div class="title">Créer une liste de tâches</div>
+                <div class="title">Créer une tâche dans la liste N°${$f7route.params.idList}</div>
             </div>
         </div>
         <div class="page-content">
@@ -18,9 +18,9 @@
                     <li>
                         <div class="item-content item-input">
                             <div class="item-inner">
-                                <div class="item-title item-label">Nom de la liste</div>
+                                <div class="item-title item-label">Nom de la tâche</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" id="nomListe" name="nom" placeholder="Nom de la liste" autofocus />
+                                    <input type="text" id="nom" name="nom" placeholder="Nom de la tâche" autofocus />
                                 </div>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                     <li>
                         <div class="item-content item-input">
                             <div class="item-inner">
-                                <div class="item-title item-label">Description de la liste</div>
+                                <div class="item-title item-label">Description de la tâche</div>
                                 <div class="item-input-wrap">
                                     <textarea type="text" id="description" name="description"
                                         placeholder="Description"></textarea>
@@ -36,10 +36,20 @@
                             </div>
                         </div>
                     </li>
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Priorité de la tâche</div>
+                                <div class="item-input-wrap">
+                                    <input type="number" id="niveau" name="niveau" id="niveau" placeholder="Niveau" autofocus />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </form>
             <div class="block block-strong row">
-                <div class="col"><button class="button button-fill" href="#" id="btnSave">Créer</button></div>
+                <div class="col"><button class="button button-fill" href="#" id="btnCreate">Créer</button></div>
             </div>
         </div>
     </div>
@@ -47,16 +57,17 @@
 <script>
     export default (props, { $, $f7router, $on, $f7 }) => {
         $on('pageInit', () => {
-            $("#btnSave").click(() => {
+            $("#btnCreate").click(() => {
                 const data = $f7.form.convertToData('#typeAdd');
+                const {nom, description, niveau} = data;
                 // Envoie les données à l'API via une requête POST
-                $f7.request.post('http://localhost/api_f7/index.php?q=creerListe', data, (response) => {
-                    const { nomliste } = data;
+                $f7.request.post('http://localhost/api_f7/index.php?q=creerTache', {idList: props.idList, nom, description, niveau}, (response) => {
                     try {
                         const jsonResponse = JSON.parse(response);
-                        $f7.dialog.alert(nomliste + " a bien été ajoutée dans la liste !");
-                        $f7router.navigate('/taches/list/');
+                        $f7.dialog.alert("La tâche " + nom + " a bien été ajoutée dans la liste !");
+                        $f7router.navigate('/lesTaches/' + props.idList);
                     } catch (error) {
+                        console.log(error);
                         $f7.dialog.alert("Erreur interne");
                     }
                 }, (error) => {

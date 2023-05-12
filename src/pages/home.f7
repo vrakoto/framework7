@@ -12,12 +12,10 @@
         </div>
         <!-- Scrollable page content-->
         <div class="page-content">
-            <div class="block-title">Panels</div>
             <div class="list links-list">
                 <ul>
                     <li>
-                        <a href="/taches/list/">La liste</a>
-                        <!-- <a href="/type/list/">Les types</a> -->
+                        <a href="/list">Consulter la liste</a>
                     </li>
                 </ul>
             </div>

@@ -1,5 +1,5 @@
 <template>
-    <div class="page" data-name="type-detail">
+    <div class="page" data-name="type-create">
         <div class="navbar">
             <div class="navbar-bg"></div>
             <div class="navbar-inner sliding">
@@ -9,7 +9,7 @@
                         <span class="if-not-md">Retour</span>
                     </a>
                 </div>
-                <div class="title">Liste N°${$f7route.params.idList}</div>
+                <div class="title">Créer une liste de tâches</div>
             </div>
         </div>
         <div class="page-content">
@@ -20,61 +20,51 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Nom de la liste</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" name="title" id="title" placeholder="Nom de la liste" />
+                                    <input type="text" id="nomListe" name="nom" placeholder="Nom de la liste" autofocus />
                                 </div>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="item-content item-input">
                             <div class="item-inner">
                                 <div class="item-title item-label">Description de la liste</div>
-                                <div class="item-textarea-wrap">
-                                    <textarea name="name" id="description"></textarea>
+                                <div class="item-input-wrap">
+                                    <textarea type="text" id="description" name="description"
+                                        placeholder="Description"></textarea>
                                 </div>
                             </div>
                         </div>
                     </li>
                 </ul>
             </form>
-            <div class="block block-strong">
-                <button class="col button button-fill" id="btnUpdate">Supprimer la liste</button>
+            <div class="block block-strong row">
+                <div class="col"><button class="button button-fill" href="#" id="btnSave">Créer</button></div>
             </div>
         </div>
     </div>
 </template>
 <script>
     export default (props, { $, $f7router, $on, $f7 }) => {
-        $on("pageInit", () => {
-            $f7.request.get(`http://localhost/api_f7/index.php?q=laListe&id=${props.idList}`)
-                .then(function (res) {
-                    if (res.data) {
-                        const laListe = JSON.parse(res.data)
-                        $('#title').val(laListe[0].nom)
-                        $('#description').append(laListe[0].description)
-                    }
-                })
-                .catch(function (err) {
-                    console.log(err.xhr)
-                    console.log(err.status)
-                    console.log(err.message)
-                })
-            $("#btnUpdate").click(() => {
-                $f7.request.post('http://localhost/api_f7/index.php?q=supprimerListe', {idListe: props.idList}, (response) => {
+        $on('pageInit', () => {
+            $("#btnSave").click(() => {
+                const data = $f7.form.convertToData('#typeAdd');
+                // Envoie les données à l'API via une requête POST
+                $f7.request.post('http://localhost/api_f7/index.php?q=creerListe', data, (response) => {
+                    const { nom } = data;
                     try {
+                        console.log("ok");
                         const jsonResponse = JSON.parse(response);
-                        $f7.dialog.alert("La liste " + props.idList + " a bien été supprimée de la liste !");
-                        $f7router.navigate('/taches/list/');
+                        $f7.dialog.alert(nom + " a bien été ajoutée dans la liste des tâches !");
+                        $f7router.navigate('/list');
                     } catch (error) {
                         $f7.dialog.alert("Erreur interne");
                     }
                 }, (error) => {
                     console.error('Error:', error);
                 });
-            });
-        })
-
+            })
+        });
         return $render;
-    };
+    }
 </script>

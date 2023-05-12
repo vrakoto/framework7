@@ -4,17 +4,13 @@ import DynamicRoutePage from '../pages/dynamic-route.f7';
 import RequestAndLoad from '../pages/request-and-load.f7';
 import NotFoundPage from '../pages/404.f7';
 
-/* import TypeList from "../pages/Types/list.f7";
-import TypeDetail from "../pages/Types/details.f7";
-import TypeCreate from "../pages/Types/create.f7";
-import TypeUpdate from "../pages/Types/update.f7"; */
 
-import TachesList from "../pages/Taches/list.f7";
-import LaTache from "../pages/Taches/tache.f7";
+import TachesList from "../pages/Listes/list.f7";
+import ListTachesCreate from "../pages/Listes/create_list.f7";
+import ListeTachesDetails from "../pages/Listes/details_list.f7";
+
+import LesTaches from "../pages/Taches/les_taches.f7";
 import TacheCreate from "../pages/Taches/create_tache.f7";
-import ListTachesCreate from "../pages/Taches/create_list.f7";
-import ListeTachesDetails from "../pages/Taches/details_list.f7";
-import TacheUpdate from "../pages/Taches/update.f7";
 
 import TacheDetail from "../pages/Taches/detail.f7";
 
@@ -23,45 +19,35 @@ var routes = [
         path: '/',
         component: HomePage,
     },
-    // {
-    //   path: '/type/list/',
-    //   component: TypeList,
-    // },
-    // {
-    //   path: '/type/detail/:idType',
-    //   component: TypeDetail,
-    // },
-    // {
-    //   path: '/type/create/',
-    //   component: TypeCreate,
-    // },
-    // {
-    //   path: '/type/update/:idType',
-    //   component: TypeUpdate,
-    // },
 
-    {
-        path: '/list_tache/edit/:idList',
-        component: ListeTachesDetails
-    },
 
+    // Routes liste
     {
-        path: '/taches/list/',
+        path: '/list',
         component: TachesList,
     },
     {
-        path: '/taches/tache/:idTache',
-        component: LaTache,
+        path: '/list/create/',
+        component: ListTachesCreate
     },
     {
-        path: '/tache/create/',
-        component: ListTachesCreate,
+        path: '/list/edit/:idList',
+        component: ListeTachesDetails
+    },
+
+    
+    // Routes tache
+    {
+        // Les tâches d'une liste sélectionnée
+        path: '/lesTaches/:idList',
+        component: LesTaches,
     },
     {
-        path: '/tache/update/:idTache',
-        component: TacheUpdate,
+        path: '/tache/create/:idList',
+        component: TacheCreate,
     },
     {
+        // Comprend la suppression et modification de la tache
         path: '/tache/detail/:idTache',
         component: TacheDetail,
     },
